@@ -1,3 +1,7 @@
+.guestbook-entry {
+    font-size: 200%;    
+}
+
 .header-wrap {
     z-index: 100;
     padding: 0 16px;

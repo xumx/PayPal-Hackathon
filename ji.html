@@ -5,6 +5,7 @@
 
     <link href='http://fonts.googleapis.com/css?family=Raleway:400,700' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <script src="https://js.braintreegateway.com/v2/braintree.js" async></script>
 </head>
 
 <body>
@@ -49,8 +50,8 @@
     <div class="body-wrap">
         <div class="fotorama-wrap-frontpage noise">
             <div class="fotorama" data-autoplay="true" data-nav="thumbs" data-allowfullscreen="true" data-fit="cover" data-width="100%" data-height="100%">
-                <img src="http://s.fotorama.io/1.jpg" data-full="">
-                <img src="http://s.fotorama.io/2.jpg">
+                <!-- <img src="http://s.fotorama.io/1.jpg" data-full=""> -->
+                <!-- <img src="http://s.fotorama.io/2.jpg"> -->
             </div>
         </div>
     </div>
@@ -104,9 +105,16 @@
                 </div>
                 <div class="bb-item" id="item5">
                     <div class="content">
-                        <div class="scroller">
+                        <div class="scroller guestbook-entry">
                             <h2>Guestbook Entry</h2> 
                             {{> quickForm collection="Guestbook" id="guestbook-new-entry" type="insert"}}
+                        </div>
+                    </div>
+                </div>
+                <div class="bb-item" id="item6">
+                    <div class="content">
+                        <div class="scroller">
+                            {{> donation}}
                         </div>
                     </div>
                 </div>

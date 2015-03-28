@@ -15,3 +15,5 @@ aldeed:simple-schema
 aldeed:collection2
 fourseven:scss
 coffeescript
+iron:layout
+mpowaga:autoform-summernote
