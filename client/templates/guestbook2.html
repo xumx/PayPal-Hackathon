@@ -1,0 +1,11 @@
+<template name="guestbook2">
+  <h2>Tributes</h2>
+  <div class="guestbook-container">
+    {{ #each guestBookEntry}}
+      <div class="entry">
+        <p class='message'>"{{message}}"</p>
+        <p class="author">{{author}}</p>
+      </div>
+    {{/each}}
+  </div>
+</template>

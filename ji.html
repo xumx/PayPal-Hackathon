@@ -1,12 +1,14 @@
 <head>
     <link href="http://cdnjs.cloudflare.com/ajax/libs/fotorama/4.6.3/fotorama.css" rel="stylesheet">
     <script src="http://cdnjs.cloudflare.com/ajax/libs/fotorama/4.6.3/fotorama.js"></script>
+    <script src="/js/masonry.js"></script>
+
     <link href='http://fonts.googleapis.com/css?family=Raleway:400,700' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 </head>
 
 <body>
-    {{> nav}}
+    {{> yield}}
 </body>
 <template name="home">
     <div>
@@ -35,9 +37,6 @@
 </template>
 <template name="form">
     {{> quickForm collection="Site" id="details" type="insert"}}
-</template>
-<template name="donation">
-    <h2>Giff me money.</h2>
 </template>
 <template name="gallery">
     <div class="header-wrap">
