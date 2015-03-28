@@ -2,7 +2,6 @@
     <link href="http://cdnjs.cloudflare.com/ajax/libs/fotorama/4.6.3/fotorama.css" rel="stylesheet">
     <script src="http://cdnjs.cloudflare.com/ajax/libs/fotorama/4.6.3/fotorama.js"></script>
     <script src="/js/masonry.js"></script>
-
     <link href='http://fonts.googleapis.com/css?family=Raleway:400,700' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
     <script src="https://js.braintreegateway.com/v2/braintree.js"></script>
@@ -11,38 +10,119 @@
 <body>
     {{> yield}}
 </body>
-<template name="home">
-    <div>
-        <div class="cover-container" style="width:50%; position:fixed; top:0; left:0; overflow:hidden;">
-            <img src="http://static1.squarespace.com/static/550fd116e4b0f7f604b1267d/55100ea1e4b0e1eb265dc0ef/55101166e4b05c49fa3327da/1427116391978/Slice-1.jpg" alt="">
+
+<template name="nav">
+    <div id="container" class="container" style="width:100%;max-width:none;">
+        <div class="menu-panel">
+            <h3></h3>
+            <ul id="menu-toc" class="menu-toc">
+                <li><a href="#item1">Home</a></li>
+                <li><a href="#item2">Funeral</a></li>
+                <li><a href="#item3">Tribtues</a></li>
+                <li><a href="#item4">New Tribtue</a></li>
+                <li><a href="#item5">Donate</a></li>
+                <li><a href="#item6">Gallery</a></li>
+                <li><a href="#item7">Contact</a></li>
+                <li><a href="#item8">Edit</a></li>
+            </ul>
         </div>
-        <div style="width:50%; float:right;">
-            <h2>Winston Koh</h2>
-            <p>Up comming</p>
-            <div class="event-title">
-                Wake
+        <div class="bb-custom-wrapper">
+            <div id="bb-bookblock" class="bb-bookblock">
+                <div class="bb-item" id="item1">
+                    <div class="content">
+                        <div class="scroller">
+                            {{> home}}
+                        </div>
+                    </div>
+                </div>
+                <div class="bb-item" id="item2">
+                    <div class="content">
+                        <div class="scroller">
+                        	{{> funeral}}
+                        </div>
+                    </div>
+                </div>
+                <div class="bb-item" id="item3">
+                    <div class="content">
+                        <div class="scroller">
+                            {{> guestbook2}}
+                        </div>
+                    </div>
+                </div>
+                <div class="bb-item" id="item4">
+                    <div class="content">
+                        <div class="scroller">
+                            <div class="scroller guestbook-entry">
+                                <h2>Write tribute</h2>
+                                <div class="container">
+                                    {{> quickForm collection="Guestbook" id="guestbook-new-entry" type="insert"}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="bb-item" id="item5">
+                    <div class="content">
+                        <div class="scroller">
+                            {{> donate}}
+                        </div>
+                    </div>
+                </div>
+                <div class="bb-item" id="item6">
+                    <div class="content">
+                        <div class="scroller">
+                            {{> gallery}}
+                        </div>
+                    </div>
+                </div>
+                <div class="bb-item" id="item7">
+                    <div class="content">
+                        <div class="scroller">
+                        	{{> contact}}
+                        </div>
+                    </div>
+                </div>
+                <div class="bb-item" id="item8">
+                    <div class="content">
+                        <div class="scroller">
+                        	{{> create}}
+                        </div>
+                    </div>
+                </div>
             </div>
-            <p>30 March (Mon) to 2 April (Tue)
-                <br> Location - Block 15, Jurong East Street 82
-            </p>
+            <nav>
+                <span id="bb-nav-prev">&larr;</span>
+                <span id="bb-nav-next">&rarr;</span>
+            </nav>
+            <span id="tblcontents" class="menu-button">Table of Contents</span>
         </div>
     </div>
+    <!-- /container -->
 </template>
+
 <template name="create">
     <div class="container">
-    	{{> form}}
+        {{> form}}
     </div>
 </template>
 <template name="guestbook">
     {{#each guestBookEntry}}
-	    <h3>{{author}}</h3>
-	    {{{message}}}
-	    <hr>
-    {{/each}}
+    <h3>{{author}}</h3> {{{message}}}
+    <hr> {{/each}}
 </template>
+
+<template name="donation">
+    <h2>Donation</h2>
+    <form id="checkout" method="post" action="/checkout">
+        <div id="dropin"></div>
+        <input type="submit" value="Donate $10" style="width:200px;">
+    </form>
+</template>
+
 <template name="form">
     {{> quickForm collection="Site" id="details" type="insert"}}
 </template>
+
 <template name="gallery">
     <div class="header-wrap">
         <div class="header">
@@ -59,78 +139,4 @@
             </div>
         </div>
     </div>
-</template>
-<template name="nav">
-    <div id="container" class="container" style="width:100%;max-width:none;">
-        <div class="menu-panel">
-            <h3>Navigation</h3>
-            <ul id="menu-toc" class="menu-toc">
-                <li class="menu-toc-current"><a href="#item1">Gallery</a></li>
-                <li><a href="#item2">Home</a></li>
-                <li><a href="#item3">Tribute</a></li>
-                <li><a href="#item4">Contact</a></li>
-                <li><a href="#item5">Write Tribtue</a></li>
-                <li><a href="#item6">Donate</a></li>
-            </ul>
-            <div>
-                <a></a>
-                <a></a>
-            </div>
-        </div>
-        <div class="bb-custom-wrapper">
-            <div id="bb-bookblock" class="bb-bookblock">
-                <div class="bb-item" id="item1">
-                    <div class="content">
-                        <div class="scroller">
-                            {{> home}}
-                        </div>
-                    </div>
-                </div>
-                <div class="bb-item" id="item2">
-                    <div class="content">
-                        <div class="scroller">
-                            {{>form}}
-                        </div>
-                    </div>
-                </div>
-                <div class="bb-item" id="item3">
-                    <div class="content">
-                        <div class="scroller">
-                            {{> gallery}}
-                        </div>
-                    </div>
-                </div>
-                <div class="bb-item" id="item4">
-                    <div class="content">
-                        <div class="scroller">
-                            {{> guestbook}}
-                        </div>
-                    </div>
-                </div>
-                <div class="bb-item" id="item5">
-                    <div class="content">
-                        <div class="scroller guestbook-entry">
-                            <h2>Write tribute</h2> 
-                            <div class="container">
-                            	{{> quickForm collection="Guestbook" id="guestbook-new-entry" type="insert"}}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="bb-item" id="item6">
-                    <div class="content">
-                        <div class="scroller">
-                            {{> donation}}
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <nav>
-                <span id="bb-nav-prev">&larr;</span>
-                <span id="bb-nav-next">&rarr;</span>
-            </nav>
-            <span id="tblcontents" class="menu-button">Table of Contents</span>
-        </div>
-    </div>
-    <!-- /container -->
 </template>
