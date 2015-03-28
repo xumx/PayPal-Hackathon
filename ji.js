@@ -2,8 +2,8 @@ Guestbook = new Mongo.Collection("guestbook");
 Guestbook.attachSchema(new SimpleSchema({
     author: {
         type: String,
-        label: 'Name',
         autoform: {
+            placeholder: "Name:",
             afFieldInput: {
                 class: 'underline'
             }
@@ -11,11 +11,12 @@ Guestbook.attachSchema(new SimpleSchema({
     },
     message: {
         type: String,
-        label: 'Message',
+        label: 'Message:',
         autoform: {
             afFieldInput: {
                 type: 'summernote',
-                class: 'editor' // optional
+                class: 'editor', // optional
+                height: '500px;'
             }
         }
     }
@@ -58,15 +59,15 @@ Site.attachSchema(new SimpleSchema({
 
     wake: {
         type: Object,
-        label: "Wake",
+        label: "Wake details",
         optional: true
     },
     'wake.details': {
         type: String,
-        label: "Wake Information",
+        label: "Information",
         autoform: {
             rows: 10,
-            value: "Date: __/__/____ - __/__/____ \n Location"
+            value: "Date:\nTime:"
         }
     },
     'wake.location': {
@@ -79,21 +80,19 @@ Site.attachSchema(new SimpleSchema({
                 searchBox: true,
                 autolocate: true,
                 mapType: 'roadmap',
-                searchBox: true,
-                width: '500px',
-                height: '500px'
+                searchBox: true
             }
         }
     },
 
     funeral: {
         type: Object,
-        label: "Funeral",
+        label: "Funeral details",
         optional: true
     },
     'funeral.details': {
         type: String,
-        label: "Funeral Information",
+        label: "Information",
         autoform: {
             rows: 10,
             value: "Date:\nTime:",
@@ -110,8 +109,7 @@ Site.attachSchema(new SimpleSchema({
                 searchBox: true,
                 autolocate: true,
                 mapType: 'roadmap',
-                searchBox: true,
-                width: '300px'
+                searchBox: true
             }
         }
     },

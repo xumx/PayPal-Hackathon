@@ -5,7 +5,7 @@
 
     <link href='http://fonts.googleapis.com/css?family=Raleway:400,700' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-    <script src="https://js.braintreegateway.com/v2/braintree.js" async></script>
+    <script src="https://js.braintreegateway.com/v2/braintree.js"></script>
 </head>
 
 <body>
@@ -29,12 +29,16 @@
     </div>
 </template>
 <template name="create">
-    {{> form}}
+    <div class="container">
+    	{{> form}}
+    </div>
 </template>
 <template name="guestbook">
     {{#each guestBookEntry}}
-    <h2>{{author}}</h2>
-    <hr> {{message}} {{/each}}
+	    <h3>{{author}}</h3>
+	    {{{message}}}
+	    <hr>
+    {{/each}}
 </template>
 <template name="form">
     {{> quickForm collection="Site" id="details" type="insert"}}
@@ -63,9 +67,10 @@
             <ul id="menu-toc" class="menu-toc">
                 <li class="menu-toc-current"><a href="#item1">Gallery</a></li>
                 <li><a href="#item2">Home</a></li>
-                <li><a href="#item3">Guestbook</a></li>
+                <li><a href="#item3">Tribute</a></li>
                 <li><a href="#item4">Contact</a></li>
-                <li><a href="#item5">...</a></li>
+                <li><a href="#item5">Write Tribtue</a></li>
+                <li><a href="#item6">Donate</a></li>
             </ul>
             <div>
                 <a></a>
@@ -98,7 +103,6 @@
                 <div class="bb-item" id="item4">
                     <div class="content">
                         <div class="scroller">
-                            
                             {{> guestbook}}
                         </div>
                     </div>
@@ -106,8 +110,10 @@
                 <div class="bb-item" id="item5">
                     <div class="content">
                         <div class="scroller guestbook-entry">
-                            <h2>Guestbook Entry</h2> 
-                            {{> quickForm collection="Guestbook" id="guestbook-new-entry" type="insert"}}
+                            <h2>Write tribute</h2> 
+                            <div class="container">
+                            	{{> quickForm collection="Guestbook" id="guestbook-new-entry" type="insert"}}
+                            </div>
                         </div>
                     </div>
                 </div>

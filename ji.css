@@ -1,5 +1,19 @@
-.guestbook-entry {
-    font-size: 200%;    
+/*.guestbook-entry form {
+    text-align: center;
+}
+*/
+
+form input[type=text]{
+    height: 64px;
+    font-size: 2em;
+}
+
+.editor {
+    height: 500px;
+}
+
+.guestbook-entry form .control-label {
+    font-weight: 300;
 }
 
 .header-wrap {
