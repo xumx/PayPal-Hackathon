@@ -139,8 +139,8 @@ a:hover {
 	height: 32px;
 	top: 0;
 	left: 0;
-	background: #f1103a;
-	border-radius: 50%;
+	background: #222;
+	/*border-radius: 50%;*/
 	color: #fff;
 	line-height: 30px;
 	text-align: center;

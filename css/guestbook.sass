@@ -1,5 +1,29 @@
 .guestbook-container
-  .entry
   .author
     text-align: right
     font-style: italic
+
+.bb-custom-wrapper nav span, .menu-button
+  transition: all 0.3s ease
+  margin-right: 5px
+  transform: scale(1.3)
+  // color: #222
+  // background: white
+  font-weight: bold
+  &:hover
+    transform: scale(1.5)
+    // border-radius: 50%
+#bb-nav-prev
+  margin-right: 10px
+#bb-nav-next, #bb-nav-prev
+  margin-left: 10px
+.menu-panel
+  background: #222
+  .menu-toc li a
+    background: #222
+    border-bottom: 1px solid #fff
+
+
+#iron-router-progress
+  background-color: #222
+  box-shadow: 0 0 5px #222
