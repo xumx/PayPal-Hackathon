@@ -10,6 +10,7 @@
 <body style="height: 100%; overflow: auto;">
     {{> yield}}
 </body>
+
 <template name="nav">
     <div id="container" class="container" style="width:100%;max-width:none;">
         <div class="menu-panel">
@@ -27,7 +28,6 @@
             <a href="{{pathFor 'create'}}" target="_blank">Edit Site</a>
         </div>
 
-        {{#with site}}
         <div class="bb-custom-wrapper">
             <div id="bb-bookblock" class="bb-bookblock">
                 <div class="bb-item" id="item1">
@@ -91,56 +91,6 @@
             </nav>
             <span id="tblcontents" class="menu-button">Table of Contents</span>
         </div>
-        {{/with}}
     </div>
     <!-- /container -->
-</template>
-<template name="create">
-    <div class="container">
-        <h1>
-            Tell us more
-        </h1>
-        {{> quickForm collection="Site" id="details" type=insertOrUpdate doc=doc}}
-        <br>
-
-        <h1>Optional</h1>
-
-        <h3>Choose a Charity as donation target. //TODO Rephrase this</h3>
-        <input type="text" name="charityQuery">
-        <button name="searchCharity">Search</button>
-        <hr>
-
-
-
-        {{#each charityList}}
-        <div class="block" style="display: inline-block; max-width: 400px; margin: 16px; padding:16px;">
-            <!-- <img src="{{logoUrl}}" alt=""> -->
-            <h4>{{name}}</h4>
-            <p>{{description}}</p>
-            <button name="selectCharity">Choose</button>
-            <button>Details</button>
-        </div>
-        
-        {{/each}}
-    </div>
-</template>
-<template name="gallery">
-    <h2>Photo Gallery</h2>
-    <div class="photo-gallery">
-        <img src="/img/smuwkoh1.jpg">
-        <img src="/img/smuwkoh2.jpg">
-        <img src="/img/smuwkoh3.jpg">
-        <img src="/img/smuwkoh4.jpg">
-        <img src="/img/smuwkoh5.jpg">
-        <img src="/img/smuwkoh6.jpg">
-        <img src="/img/smuwkoh7.jpg">
-        <img src="/img/smuwkoh8.jpg">
-        <img src="/img/smuwkoh9.jpg">
-        <img src="/img/smuwkoh10.jpg">
-        <img src="/img/smuwkoh11.jpg">
-        <img src="/img/smuwkoh12.jpg">
-        <img src="/img/smuwkoh13.jpg">
-        <img src="/img/smuwkoh14.jpg">
-        <img src="/img/smuwkoh15.jpg">
-    </div>
 </template>

@@ -1,12 +1,18 @@
 <template name="donation">
-      <h2>Donation</h2>
-    <form id="checkout" method="post" action="/checkout">
-        <div id="dropin"></div>
-        <input type="submit" value="Donate $10" style="width:200px;">
-    </form>
-
-    <h3>Just Giving</h3>
-    <script id="jgGive" data-charity="2050" data-env="https://www.justgiving.com" src="https://www.justgiving.com/bundles/js/givewidgetloader.js" data-width="330"></script>
-
+    <h2>Donations</h2>
+    <div class="row">
+        <div class="col-md-6">
+            <p>In lieu of flowers, charitable donations can be made to {{charity.name}}</p>
+            <div id="jg">
+            </div>
+        </div>
+        <div class="col-md-6">
+        	<p>Donate to the family</p>
+            <form id="checkout" method="post" action="/checkout">
+                <div id="dropin"></div>
+                <input type="submit" value="Donate $10" style="width:200px;">
+            </form>
+        </div>
+    </div>
+    <!-- http://sofii.org/article/in-lieu-of-flowers-how-to-write-lively-memorial-donation-thank-you-letters -->
 </template>
-

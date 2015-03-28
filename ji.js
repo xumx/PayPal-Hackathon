@@ -2,6 +2,7 @@ JUSTGIVING_ENDPOINT = 'https://api.justgiving.com/54d08cef';
 
 Action = {
     justgiving: function() {
+
         //Save The Children
         //
         // Meteor.call('justgiving.CharitySearch', function(error, result) {
@@ -145,6 +146,7 @@ Site.attachSchema(new SimpleSchema({
 
     charity: {
         type: Object,
+        blackbox: true,
         optional: true,
         autoform: {
             omit: true
@@ -160,11 +162,15 @@ Site.attachSchema(new SimpleSchema({
 }));
 
 Router.route('/', function() {
-    this.render('nav', {
-        data: function() {
-            return {}
-        }
-    });
+    if (Site.findOne() == null) {
+        this.render(landing);
+    } else {
+        this.render('nav', {
+            data: function() {
+                return Site.findOne()
+            }
+        });
+    }
 });
 
 Router.route('/landing', function() {
@@ -275,6 +281,16 @@ if (Meteor.isClient) {
             'dropin', {
                 container: 'dropin'
             });
+
+        var site = Site.findOne();
+        if (site.charity) {
+            $('<script>').appendTo('#jg').attr({
+                'data-charity': site.charity.charityId,
+                'data-env': "https://www.justgiving.com",
+                'data-width': "330",
+                'id': 'jgGive',
+            }).attr('src', 'https://www.justgiving.com/bundles/js/givewidgetloader.js');
+        }
     }
 
     Template.gallery.rendered = function() {
