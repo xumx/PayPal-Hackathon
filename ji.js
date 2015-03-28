@@ -135,6 +135,10 @@ Router.route('/create', function() {
     this.render('create');
 });
 
+Router.route('/landing', function() {
+    this.render('landing');
+});
+
 
 if (Meteor.isClient) {
 
