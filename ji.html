@@ -10,7 +10,6 @@
 <body style="height: 100%; overflow: auto;">
     {{> yield}}
 </body>
-
 <template name="nav">
     <div id="container" class="container" style="width:100%;max-width:none;">
         <div class="menu-panel">
@@ -18,16 +17,14 @@
             <ul id="menu-toc" class="menu-toc">
                 <li><a href="#item1">Home</a></li>
                 <li><a href="#item2">Funeral</a></li>
-                <li><a href="#item3">Tributes</a></li>
-                <li><a href="#item4">New Tribtue</a></li>
+                <li><a href="#item3">Write Tribtue</a></li>
+                <li><a href="#item4">Tributes</a></li>
                 <li><a href="#item5">Donate</a></li>
                 <li><a href="#item6">Gallery</a></li>
                 <li><a href="#item7">Contact</a></li>
             </ul>
-
             <a href="{{pathFor 'create'}}" target="_blank">Edit Site</a>
         </div>
-
         <div class="bb-custom-wrapper">
             <div id="bb-bookblock" class="bb-bookblock">
                 <div class="bb-item" id="item1">
@@ -47,19 +44,19 @@
                 <div class="bb-item" id="item3">
                     <div class="content">
                         <div class="scroller">
-                            {{> guestbook}}
-                        </div>
-                    </div>
-                </div>
-                <div class="bb-item" id="item4">
-                    <div class="content">
-                        <div class="scroller">
                             <div class="scroller guestbook-entry">
                                 <h2>Write tribute</h2>
                                 <div class="container">
                                     {{> quickForm collection="Guestbook" id="guestbook-new-entry" type="insert"}}
                                 </div>
                             </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="bb-item" id="item4">
+                    <div class="content">
+                        <div class="scroller">
+                            {{> guestbook}}
                         </div>
                     </div>
                 </div>

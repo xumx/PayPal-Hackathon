@@ -153,17 +153,32 @@ Site.attachSchema(new SimpleSchema({
         }
     },
 
-    contact_email: {
+    contact: {
+        type: Object,
+        label: "Contact Person"
+    },
+    'contact.name': {
         type: String,
-        label: "Contact Email",
-        regEx: SimpleSchema.RegEx.Email
+        label: "Name:",
+        optional: true
+    },
+    'contact.phone': {
+        type: String,
+        label: "Phone Number:",
+        optional: true
+    },
+    'contact.email': {
+        type: String,
+        label: "Email:",
+        regEx: SimpleSchema.RegEx.Email,
+        optional: true
     }
 
 }));
 
 Router.route('/', function() {
     if (Site.findOne() == null) {
-        this.render(landing);
+        this.render('landing');
     } else {
         this.render('nav', {
             data: function() {
