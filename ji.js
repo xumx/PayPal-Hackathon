@@ -1,3 +1,135 @@
+Guestbook = new Mongo.Collection("guestbook");
+Guestbook.attachSchema(new SimpleSchema({
+    author: {
+        type: String,
+        label: 'Name'
+    },
+    message: {
+        type: String,
+        label: 'Message',
+        autoform: {
+            rows: 10
+        }
+    }
+}));
+
+Site = new Mongo.Collection("site");
+Site.attachSchema(new SimpleSchema({
+    person: {
+        type: Object,
+        label: "Deceased"
+    },
+    'person.name': {
+        type: String,
+        label: "Name",
+    },
+    'person.about': {
+        type: String,
+        label: "About",
+        max: 2000,
+        autoform: {
+            rows: 10,
+            placeholder: "Short description"
+        }
+    },
+    'person.yob': {
+        type: Number,
+        label: "Year of birth",
+        optional: true,
+        min: 1900,
+        max: 2015
+    },
+    'person.yod': {
+        type: Number,
+        label: "Year of death",
+        optional: true,
+        min: 1900,
+        max: 3000
+    },
+
+
+    wake: {
+        type: Object,
+        label: "Wake",
+        optional: true
+    },
+    'wake.details': {
+        type: String,
+        label: "Wake Information",
+        autoform: {
+            rows: 10,
+            value: "Date: __/__/____ - __/__/____ \n Location"
+        }
+    },
+    'wake.location': {
+        type: String,
+        autoform: {
+            type: 'map',
+            afFieldInput: {
+                type: 'map',
+                geolocation: true,
+                searchBox: true,
+                autolocate: true,
+                mapType: 'roadmap',
+                searchBox: true,
+                width: '500px',
+                height: '500px'
+            }
+        }
+    },
+
+    funeral: {
+        type: Object,
+        label: "Funeral",
+        optional: true
+    },
+    'funeral.details': {
+        type: String,
+        label: "Funeral Information",
+        autoform: {
+            rows: 10,
+            value: "Date:\nTime:",
+            width: '300px;'
+        }
+    },
+    'funeral.location': {
+        type: String,
+        autoform: {
+            type: 'map',
+            afFieldInput: {
+                type: 'map',
+                geolocation: true,
+                searchBox: true,
+                autolocate: true,
+                mapType: 'roadmap',
+                searchBox: true,
+                width: '300px'
+            }
+        }
+    },
+
+    contact_email: {
+        type: String,
+        label: "Contact Email",
+        regEx: SimpleSchema.RegEx.Email
+    }
+
+}));
+
+
+Router.route('/', function() {
+    this.render('nav', {
+        data: function() {
+            return {}
+        }
+    });
+});
+
+Router.route('/create', function() {
+    this.render('create');
+});
+
+
 if (Meteor.isClient) {
 
     Template.guestbook.events({
@@ -9,13 +141,7 @@ if (Meteor.isClient) {
 
     Template.guestbook.helpers({
         guestBookEntry: function() {
-            return [{
-                author: "Max",
-                message: "Convenience store augmented reality city futurity industrial grade disposable neural smart-. Dead otaku table San Francisco boy vinyl papier-mache towards shanty town. Vehicle engine bicycle sensory post- receding voodoo god assassin euro-pop wristwatch RAF drone nodal point chrome neural. Paranoid artisanal pistol fluidity tower assassin film nodality nodal point pen jeans man courier refrigerator range-rover meta- urban. Math- saturation point human dolphin boat shoes -space augmented reality towards semiotics youtube tower neon sentient weathered cyber-. Rebar Kowloon lights artisanal human drugs alcohol denim fetishism neon bomb systema post- vehicle. Camera order-flow corrupted drone 3D-printed A.I. gang math- shoes grenade hotdog skyscraper concrete. Dome rebar otaku plastic receding gang physical systemic."
-            }, {
-                author: "Max",
-                message: "Convenience store augmented reality city futurity industrial grade disposable neural smart-. Dead otaku table San Francisco boy vinyl papier-mache towards shanty town. Vehicle engine bicycle sensory post- receding voodoo god assassin euro-pop wristwatch RAF drone nodal point chrome neural. Paranoid artisanal pistol fluidity tower assassin film nodality nodal point pen jeans man courier refrigerator range-rover meta- urban. Math- saturation point human dolphin boat shoes -space augmented reality towards semiotics youtube tower neon sentient weathered cyber-. Rebar Kowloon lights artisanal human drugs alcohol denim fetishism neon bomb systema post- vehicle. Camera order-flow corrupted drone 3D-printed A.I. gang math- shoes grenade hotdog skyscraper concrete. Dome rebar otaku plastic receding gang physical systemic."
-            }]
+            return Guestbook.find({});
         }
     });
     Template.guestbook.rendered = function() {
@@ -45,8 +171,9 @@ if (Meteor.isClient) {
     };
 
     Template.donation.helpers({
-      
+
     })
+
 
 
 
@@ -232,31 +359,3 @@ if (Meteor.isClient) {
         Page.init();
     });
 }
-// Site = new Mongo.Collection("site");
-// Site.attachSchema(new SimpleSchema({
-//   title: {
-//     type: String,
-//     label: "Title",
-//     max: 200
-//   },
-//   author: {
-//     type: String,
-//     label: "Author"
-//   },
-//   copies: {
-//     type: Number,
-//     label: "Number of copies",
-//     min: 0
-//   },
-//   lastCheckedOut: {
-//     type: Date,
-//     label: "Last date this book was checked out",
-//     optional: true
-//   },
-//   summary: {
-//     type: String,
-//     label: "Brief summary",
-//     optional: true,
-//     max: 1000
-//   }
-// }));

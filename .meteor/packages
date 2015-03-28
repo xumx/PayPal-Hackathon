@@ -10,3 +10,6 @@ insecure
 aldeed:autoform
 iron:router
 multiply:iron-router-progress
+yogiben:autoform-map
+aldeed:simple-schema
+aldeed:collection2
