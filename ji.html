@@ -60,11 +60,11 @@
         <div class="menu-panel">
             <h3>Navigation</h3>
             <ul id="menu-toc" class="menu-toc">
-                <li class="menu-toc-current"><a href="#item1">Gallery</a></li>
                 <li><a href="#item2">Home</a></li>
-                <li><a href="#item3">Guestbook</a></li>
+                <li class="menu-toc-current"><a href="#item1">Gallery</a></li>
+                <li><a href="#item3">Tributes</a></li>
+                <li><a href="#item3">New tribute</a></li>
                 <li><a href="#item4">Contact</a></li>
-                <li><a href="#item5">...</a></li>
             </ul>
             <div>
                 <a></a>
@@ -83,30 +83,29 @@
                 <div class="bb-item" id="item2">
                     <div class="content">
                         <div class="scroller">
-                            {{>form}}
+                            {{> gallery}}
                         </div>
                     </div>
                 </div>
                 <div class="bb-item" id="item3">
                     <div class="content">
                         <div class="scroller">
-                            {{> gallery}}
+                            {{> guestbook2}}
                         </div>
                     </div>
                 </div>
                 <div class="bb-item" id="item4">
                     <div class="content">
                         <div class="scroller">
-                            
-                            {{> guestbook}}
+                            <h2>Guestbook Entry</h2> 
+                            {{> quickForm collection="Guestbook" id="guestbook-new-entry" type="insert"}}
                         </div>
                     </div>
                 </div>
                 <div class="bb-item" id="item5">
                     <div class="content">
                         <div class="scroller">
-                            <h2>Guestbook Entry</h2> 
-                            {{> quickForm collection="Guestbook" id="guestbook-new-entry" type="insert"}}
+                            {{> contact}}
                         </div>
                     </div>
                 </div>
