@@ -10,7 +10,6 @@
 <body style="height: 100%">
     {{> yield}}
 </body>
-
 <template name="nav">
     <div id="container" class="container" style="width:100%;max-width:none;">
         <div class="menu-panel">
@@ -38,14 +37,14 @@
                 <div class="bb-item" id="item2">
                     <div class="content">
                         <div class="scroller">
-                        	{{> funeral}}
+                            {{> funeral}}
                         </div>
                     </div>
                 </div>
                 <div class="bb-item" id="item3">
                     <div class="content">
                         <div class="scroller">
-                            {{> guestbook2}}
+                            {{> guestbook}}
                         </div>
                     </div>
                 </div>
@@ -78,14 +77,14 @@
                 <div class="bb-item" id="item7">
                     <div class="content">
                         <div class="scroller">
-                        	{{> contact}}
+                            {{> contact}}
                         </div>
                     </div>
                 </div>
                 <div class="bb-item" id="item8">
                     <div class="content">
                         <div class="scroller">
-                        	{{> create}}
+                            {{> create}}
                         </div>
                     </div>
                 </div>
@@ -99,22 +98,15 @@
     </div>
     <!-- /container -->
 </template>
-
 <template name="create">
     <div class="container">
         {{> form}}
     </div>
 </template>
-<template name="guestbook">
-    {{#each guestBookEntry}}
-    <h3>{{author}}</h3> {{{message}}}
-    <hr> {{/each}}
-</template>
 
 <template name="form">
     {{> quickForm collection="Site" id="details" type="insert"}}
 </template>
-
 <template name="gallery">
 <!--     <div class="header-wrap">
         <div class="header">

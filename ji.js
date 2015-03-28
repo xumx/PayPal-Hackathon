@@ -1,9 +1,21 @@
+Action = {
+    hoiio : function (numbers) {
+        // numbers should be an array.
+        
+        Meteor.call('hoiio', numbers, function (error, result) {
+            //callback
+            console.log(result);
+        });
+    }
+}
+
 Guestbook = new Mongo.Collection("guestbook");
 Guestbook.attachSchema(new SimpleSchema({
     author: {
         type: String,
+        label: "",
         autoform: {
-            placeholder: "Name:",
+            placeholder: "Your Name:",
             afFieldInput: {
                 class: 'underline'
             }
@@ -14,9 +26,7 @@ Guestbook.attachSchema(new SimpleSchema({
         label: 'Message:',
         autoform: {
             afFieldInput: {
-                type: 'summernote',
-                class: 'editor', // optional
-                height: '500px;'
+                type: 'summernote'
             }
         }
     }
@@ -122,7 +132,6 @@ Site.attachSchema(new SimpleSchema({
 
 }));
 
-
 Router.route('/', function() {
     this.render('nav', {
         data: function() {
@@ -131,14 +140,37 @@ Router.route('/', function() {
     });
 });
 
-Router.route('/create', function() {
-    this.render('create');
-});
-
 Router.route('/landing', function() {
     this.render('landing');
 });
 
+Router.route('/create', function() {
+    this.render('create');
+});
+
+if (Meteor.isServer) {
+    Meteor.methods({
+        hoiio: function(destinations, message) {
+            var app_id = "";
+            var access_token = "";
+
+            // init hoiio sdk with app_id and access_token
+            var hoiio_sms = new HoiioSMS(app_id, access_token)
+
+            _.each(destinations, function(dest) {
+                //send a sms with dest param, msg param and callback function 
+                hoiio_sms.send(dest, msg, function(result) {
+                    if (result.status == 'success_ok') {
+                        alert('Your message has been sent successfull');
+                    } else {
+                        alert("Can't send your SMS message", true);
+                    }
+                });
+
+            });
+        }
+    });
+}
 
 if (Meteor.isClient) {
 
