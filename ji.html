@@ -14,7 +14,7 @@
 <template name="nav">
     <div id="container" class="container" style="width:100%;max-width:none;">
         <div class="menu-panel">
-            <h3></h3>
+            <h3 style="margin-bottom: 0px; text-align: center;"> <span style="background: white; border-radius: 3px; padding: 5px;color: #222;">记</span> </h3>
             <ul id="menu-toc" class="menu-toc">
                 <li><a href="#item1">Home</a></li>
                 <li><a href="#item2">Funeral</a></li>
@@ -64,7 +64,7 @@
                 <div class="bb-item" id="item5">
                     <div class="content">
                         <div class="scroller">
-                            {{> donate}}
+                            {{> donation}}
                         </div>
                     </div>
                 </div>
@@ -109,14 +109,6 @@
     {{#each guestBookEntry}}
     <h3>{{author}}</h3> {{{message}}}
     <hr> {{/each}}
-</template>
-
-<template name="donation">
-    <h2>Donation</h2>
-    <form id="checkout" method="post" action="/checkout">
-        <div id="dropin"></div>
-        <input type="submit" value="Donate $10" style="width:200px;">
-    </form>
 </template>
 
 <template name="form">
