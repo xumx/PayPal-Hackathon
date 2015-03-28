@@ -7,7 +7,7 @@
     <script src="https://js.braintreegateway.com/v2/braintree.js"></script>
 </head>
 
-<body style="height: 100%">
+<body style="height: 100%; overflow: auto;">
     {{> yield}}
 </body>
 
@@ -18,7 +18,7 @@
             <ul id="menu-toc" class="menu-toc">
                 <li><a href="#item1">Home</a></li>
                 <li><a href="#item2">Funeral</a></li>
-                <li><a href="#item3">Tribtues</a></li>
+                <li><a href="#item3">Tributes</a></li>
                 <li><a href="#item4">New Tribtue</a></li>
                 <li><a href="#item5">Donate</a></li>
                 <li><a href="#item6">Gallery</a></li>
@@ -85,7 +85,7 @@
                 <div class="bb-item" id="item8">
                     <div class="content">
                         <div class="scroller">
-                        	{{> create}}
+                        	{{> form}}
                         </div>
                     </div>
                 </div>
@@ -98,21 +98,6 @@
         </div>
     </div>
     <!-- /container -->
-</template>
-
-<template name="create">
-    <div class="container">
-        {{> form}}
-    </div>
-</template>
-<template name="guestbook">
-    {{#each guestBookEntry}}
-    <h3>{{author}}</h3> {{{message}}}
-    <hr> {{/each}}
-</template>
-
-<template name="form">
-    {{> quickForm collection="Site" id="details" type="insert"}}
 </template>
 
 <template name="gallery">
