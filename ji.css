@@ -1,1 +1,46 @@
-/* CSS declarations go here */
+.header-wrap {
+    z-index: 100;
+    padding: 0 16px;
+    -webkit-transform: translateZ(0);
+    -ms-transform: translateZ(0);
+    transform: translateZ(0);
+    
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 40%;
+    max-width: 75%;
+    height: 80px;
+    background-color: #f6f6f6;
+    background-color: rgba(246, 246, 246, .8);
+}
+
+.header {
+    padding: 8px 0 6px;
+    max-width: 760px;
+    margin: 0 auto;
+}
+
+.header .lead {
+    position: relative;
+    margin: 6px 0 -6px;
+    padding: 8px 0 9px;
+}
+
+.body-wrap {
+    position: relative;
+    background-color: #fff;
+    z-index: 9;
+    height: auto;
+}
+
+.fotorama-wrap-frontpage {
+    padding: 0;
+    margin: -10px -16px 5px;
+    overflow: hidden;
+    position: relative;
+}
+
+.fotorama-wrap-frontpage .fotorama {
+    margin-bottom: 0;
+}

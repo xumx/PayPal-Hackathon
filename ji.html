@@ -1,14 +1,22 @@
 <head>
-  <title>ji</title>
+    <link href="http://cdnjs.cloudflare.com/ajax/libs/fotorama/4.6.3/fotorama.css" rel="stylesheet">
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/fotorama/4.6.3/fotorama.js"></script>
 </head>
 
 <body>
-  <h1>Welcome to Meteor!</h1>
-
-  {{> hello}}
+    <div class="header-wrap">
+        <div class="header">
+            <p class="lead">
+                Caption
+            </p>
+        </div>
+    </div>
+    <div class="body-wrap">
+        <div class="fotorama-wrap-frontpage noise">
+            <div class="fotorama" data-autoplay="true" data-nav="thumbs" data-allowfullscreen="native" data-fit="cover" data-width="100%" data-height="100%">
+                <img src="http://s.fotorama.io/1.jpg" data-full="">
+                <img src="http://s.fotorama.io/2.jpg">
+            </div>
+        </div>
+    </div>
 </body>
-
-<template name="hello">
-  <button>Click Me</button>
-  <p>You've pressed the button {{counter}} times.</p>
-</template>
