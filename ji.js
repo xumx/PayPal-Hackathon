@@ -1,8 +1,25 @@
+JUSTGIVING_ENDPOINT = 'https://api.justgiving.com/54d08cef';
+
 Action = {
-    hoiio : function (numbers) {
+    justgiving: function() {
+        //Save The Children
+        //
+        // Meteor.call('justgiving.CharitySearch', function(error, result) {
+        //     console.log(result);
+        // });
+
+        // Meteor.call('justgiving.GetCharityById', function(error, result) {
+        //     console.log(result);
+        // });
+
+
+        https: //www.justgiving.com/4w350m3/donation/direct/charity/187580
+            return "http://www.justgiving.com/4w350m3/donation/direct/charity/18570?amount=50&currency=USD&donationId=JUSTGIVING-DONATION-ID"
+    },
+    hoiio: function(numbers) {
         // numbers should be an array.
-        
-        Meteor.call('hoiio', numbers, function (error, result) {
+
+        Meteor.call('hoiio.sms', numbers, function(error, result) {
             //callback
             console.log(result);
         });
@@ -36,7 +53,7 @@ Site = new Mongo.Collection("site");
 Site.attachSchema(new SimpleSchema({
     person: {
         type: Object,
-        label: "Deceased"
+        label: "Remembered"
     },
     'person.name': {
         type: String,
@@ -47,7 +64,7 @@ Site.attachSchema(new SimpleSchema({
         label: "About",
         max: 2000,
         autoform: {
-            rows: 10,
+            rows: 3,
             placeholder: "Short description"
         }
     },
@@ -90,7 +107,8 @@ Site.attachSchema(new SimpleSchema({
                 searchBox: true,
                 autolocate: true,
                 mapType: 'roadmap',
-                searchBox: true
+                searchBox: true,
+                height: '500px'
             }
         }
     },
@@ -119,8 +137,17 @@ Site.attachSchema(new SimpleSchema({
                 searchBox: true,
                 autolocate: true,
                 mapType: 'roadmap',
-                searchBox: true
+                searchBox: true,
+                height: '500px'
             }
+        }
+    },
+
+    charity: {
+        type: Object,
+        optional: true,
+        autoform: {
+            omit: true
         }
     },
 
@@ -150,7 +177,26 @@ Router.route('/create', function() {
 
 if (Meteor.isServer) {
     Meteor.methods({
-        hoiio: function(destinations, message) {
+        'justgiving.GetCharityById': function(id) {
+            return HTTP.get(JUSTGIVING_ENDPOINT + '/v1/charity/' + id, {
+                headers: {
+                    "Content-type": "application/json"
+                }
+            }).data;
+        },
+        'justgiving.CharitySearch': function(query) {
+            return HTTP.get(JUSTGIVING_ENDPOINT + '/v1/charity/search', {
+                params: {
+                    q: query
+                },
+                headers: {
+                    "Content-type": "application/json"
+                }
+            }).data;
+
+            //charitySearchResults
+        },
+        'hoiio.sms': function(destinations, message) {
             var app_id = "";
             var access_token = "";
 
@@ -174,21 +220,54 @@ if (Meteor.isServer) {
 
 if (Meteor.isClient) {
 
-    Template.guestbook.events({
-        'click': function() {
-            // ...
-        }
-    });
-
-
-    Template.guestbook.helpers({
-        guestBookEntry: function() {
-            return Guestbook.find({});
-        }
-    });
-    Template.guestbook.rendered = function() {
-
+    Template.create.created = function() {
+        // Session.set('charityList', []);
     };
+    Template.create.helpers({
+        charityList: function() {
+            return Session.get('charityList');
+        },
+        insertOrUpdate: function() {
+            if (Site.findOne()) {
+                return 'update';
+            } else {
+                return 'insert';
+            }
+        },
+        doc: function() {
+            return Site.findOne();
+        }
+    });
+
+    Template.create.events({
+        'click [name=searchCharity]': function(event, template) {
+            var query = template.find('[name=charityQuery]').value;
+            if (query) {
+                Meteor.call('justgiving.CharitySearch', query, function(error, result) {
+                    if (result.charitySearchResults.length) {
+                        Session.set('charityList', result.charitySearchResults);
+                    }
+                });
+            } else {
+                console.error('no search charity query');
+            }
+        },
+        'click [name=selectCharity]': function(event, template) {
+            $(event.currentTarget).parent().siblings().removeClass('selected');
+            $(event.currentTarget).parent().addClass('selected');
+
+            var site = Site.findOne();
+            if (site) {
+                Site.update(site._id, {
+                    $set: {
+                        charity: this
+                    }
+                })
+            }
+
+            console.log('selected ' + this.charityId);
+        }
+    });
 
     Template.donation.rendered = function() {
         braintree.setup(
@@ -198,15 +277,15 @@ if (Meteor.isClient) {
             });
     }
 
-    Template.gallery.events({
-        'click': function() {
-            // ...
-        }
-    });
-
     Template.gallery.rendered = function() {
 
     };
+
+    Template.nav.helpers({
+        site: function() {
+            return Site.findOne();
+        }
+    })
 
     Template.nav.rendered = function() {
         var Page = (function() {

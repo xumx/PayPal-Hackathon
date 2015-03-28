@@ -8,6 +8,10 @@ form input[type=text]{
     font-size: 2em;
 }
 
+.block.selected {
+    border: 1px black solid;
+}
+
 .editor {
     height: 500px;
 }
