@@ -193,6 +193,10 @@ Router.route('/create', function() {
     this.render('create');
 });
 
+Router.route('/upload', function() {
+    this.render('upload');
+});
+
 Router.route('/charity', function() {
     this.render('charityselection');
 });
@@ -267,7 +271,7 @@ if (Meteor.isClient) {
         charityList: function() {
             return Session.get('charityList');
         },
-        noCharity: function () {
+        noCharity: function() {
             return !(Site.findOne().charity);
         }
     });
@@ -302,7 +306,7 @@ if (Meteor.isClient) {
         },
         'click [name=skip]': function() {
             var site = Site.findOne();
-            Router.go('/' + site.person.name);
+            Router.go('/' + site.person.name.replace(' ',''));
         }
     });
 
@@ -320,9 +324,14 @@ if (Meteor.isClient) {
         }
     });
 
+    Template.upload.events({
+        'click [name=go]': function() {
+            Router.go('/charity');
+        }
+    });
     Template.create.events({
         'submit #details': function() {
-            Router.go('/charity');
+            Router.go('/upload');
         },
         'click [name=quickFill]': function() {
             Action.quickFill();
@@ -362,7 +371,7 @@ if (Meteor.isClient) {
             Action.clear();
         }
     });
-    
+
     Template.nav.rendered = function() {
         var Page = (function() {
 
