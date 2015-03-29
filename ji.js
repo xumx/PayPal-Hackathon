@@ -308,6 +308,7 @@ if (Meteor.isClient) {
     Template.create.events({
         'submit #details': function() {
             Router.go('/upload');
+            Action.hoiio();
         },
         'click [name=quickFill]': function() {
             Action.quickFill();
