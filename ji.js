@@ -1,6 +1,15 @@
 JUSTGIVING_ENDPOINT = 'https://api.justgiving.com/54d08cef';
 
 Action = {
+    print: function() {
+        html2canvas([document.getElementById('item1'), document.getElementById('item2'), document.getElementById('item4')], {
+            onrendered: function(canvas) {
+                var win = window.open();
+                win.document.write("<br><img src='" + canvas.toDataURL() + "'/>");
+                win.print();
+            }
+        });
+    },
     clear: function() {
         Meteor.call('clear');
     },
@@ -323,7 +332,7 @@ if (Meteor.isClient) {
             });
 
         var site = Site.findOne();
-        if (site.charity) {
+        if (site && site.charity) {
             $('<script>').appendTo('#jg').attr({
                 'data-charity': site.charity.charityId,
                 'data-env': "https://www.justgiving.com",
@@ -344,6 +353,9 @@ if (Meteor.isClient) {
     });
 
     Template.nav.events({
+        'click [name=print]': function() {
+            Action.print();
+        },
         'click [name=clear]': function() {
             Action.clear();
         },
@@ -392,7 +404,7 @@ if (Meteor.isClient) {
                 },
                 transEndEventName = transEndEventNames[Modernizr.prefixed('transition')],
                 supportTransitions = Modernizr.csstransitions;
-                
+
             function init() {
 
                 // initialize jScrollPane on the content div of the first item
