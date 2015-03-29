@@ -7,16 +7,19 @@
     max-width: 49%
     opacity: 0.75
     transition: all 0.6s ease
-    transform: scale(1)
+    transform: scale(0.95)
     -webkit-filter: grayscale(100%)
     filter: grayscale(100%)
     &:hover
       margin: 20px
       filter: none
       -webkit-filter: none
-      transform: scale(1.2)
+      transform: scale(1.18)
       cursor: pointer
       opacity: 1
+      -moz-box-shadow: 0 0 5px #888
+      -webkit-box-shadow: 0 0 5px #888
+      box-shadow: 0 0 5px #888
 
   @media all and (max-width: 500px)
     img
