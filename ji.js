@@ -266,6 +266,9 @@ if (Meteor.isClient) {
     Template.charityselection.helpers({
         charityList: function() {
             return Session.get('charityList');
+        },
+        noCharity: function () {
+            return !(Site.findOne().charity);
         }
     });
 
