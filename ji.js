@@ -60,21 +60,21 @@ Action = {
 
 Guestbook = new Mongo.Collection("guestbook");
 Guestbook.attachSchema(new SimpleSchema({
+    message: {
+        type: String,
+        autoform: {
+            placeholder: 'Message:',
+            rows: 10
+        }
+    },
     author: {
         type: String,
-        label: "",
+        // label: "",
         autoform: {
-            placeholder: "Your Name:",
+            placeholder: "Name:",
             afFieldInput: {
                 class: 'underline'
             }
-        }
-    },
-    message: {
-        type: String,
-        label: 'Message:',
-        autoform: {
-            rows: 10
         }
     }
 }));
