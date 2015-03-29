@@ -43,9 +43,7 @@ Guestbook.attachSchema(new SimpleSchema({
         type: String,
         label: 'Message:',
         autoform: {
-            afFieldInput: {
-                type: 'summernote'
-            }
+            rows: 10
         }
     }
 }));
@@ -176,16 +174,17 @@ Site.attachSchema(new SimpleSchema({
 
 }));
 
+
 Router.route('/', function() {
-    if (Site.findOne() == null) {
-        this.render('landing');
-    } else {
-        this.render('nav', {
-            data: function() {
-                return Site.findOne()
-            }
-        });
-    }
+    this.render('landing');
+});
+
+Router.route('/:year/:name', function() {
+    this.render('nav', {
+        data: function() {
+            return Site.findOne()
+        }
+    });
 });
 
 Router.route('/landing', function() {
@@ -240,7 +239,11 @@ if (Meteor.isServer) {
 }
 
 if (Meteor.isClient) {
-
+    Template.guestbook.helpers({
+        guestBookEntry: function () {
+            return Guestbook.find({});
+        }
+    });
     Template.create.created = function() {
         // Session.set('charityList', []);
     };
