@@ -7,7 +7,7 @@
         </select>
         <button name="searchCharity"> Search </button>
         <span> OR </span>
-        <button name="skip"> Skip and create site </button>
+        <button name="skip"> {{#if noCharity}}Skip and{{/if}} create site </button>
         <hr> {{#each charityList}}
         <div class="five columns">
             <!-- <img src="{{logoUrl}}" alt=""> -->
