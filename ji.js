@@ -35,10 +35,13 @@ Action = {
 
         Guestbook.insert({
             author: 'Andrea Koh',
-
             message: 'The years following were whirlwind ones for Winston and our Cohort – they have passed so swiftly many of us wonder where have they gone. The children grew up from the days we would hold kids’ birthday parties as an excuse for us parents to get together and have a mini-reunion; our children became young adults, accomplished in their own right – just witness this in Melissa and Andrea. Several years ago, as one by one we started to pass the age of 40 and as a reminder of our mortality, our Cambridge year started to meet annually. We generously extended this invitation to our Oxford counterparts. Winston was always one of the first to respond to the email can you make this or other date, vying for first place with another dear friend based in Hong Kong! These gatherings were organised and made painless and seamless by another dear friend, a “national treasure”, who has been key to rounding up our Cohort each year, and who has been key to joining us up on this occasion. In the course of these gatherings, where we would tuck into Singapore’s gastronomic delights, chicken rice, otak, chilli crab, while reminiscing over stodgy English food, CCF houseparties, long ago times when we were young and 10 kg lighter, Winston would amaze us with stories of his travels, sporting achievements, ball room dancing prowess and athleticism. At the time I thought – Winston seemed to grow younger every year we met, with a new tale of adventure, a new skill mastered, a new challenge he wanted to conquer – you felt so energised in his company!'
         });
 
+        Guestbook.insert({
+            author: 'Mathew',
+            message: 'As every superhero lives a double life, for me, my dad wasn’t just the athletic sportsman, the intelligent, eloquent professor, or even the charismatic dancer who looks just a little too young for his age. To me, my dad’s double life was well, the life of being my dad. I often find that is the little things people do that let us see the greatness in them. My dad would always crack lame jokes that sometimes didn’t make sense and would leave us all with quizzical expressions plastered on our faces, save for him, who would be chuckling as if he was the funniest person in the world (In his mind at least) or doing little funny things like making song parodies in a strange operatic rendition. And of course, little things like reminding me to take my vitamin c, saying “Hi Andie!” when he came home from work, telling me not to sleep too late those little things made me remember that there\'s always someone there rooting for me, to keep going , and to not give up. And when I faced a time when it seemed like everyone was against me and I felt so alone in the world, my dad supported me and always used to say "Who bully you? I\'ll beat them up for you.\" That made me feel more strong and protected than anything else in the world, it made me remember that I had my very own superhero constantly giving me superhuman strength to carry on in my life, no matter how hard it seemed to be. Even when he had our arguments, I knew my dad meant the best for me, and sacrificed so much just for my own good. Just like any superhero would, my dad would always put others first, and wanted to protect others at any cost.'
+        });
     },
     justgiving: function() {
 
@@ -258,9 +261,14 @@ if (Meteor.isServer) {
 }
 
 if (Meteor.isClient) {
+
     Template.guestbook.helpers({
         guestBookEntry: function() {
-            return Guestbook.find({});
+            return Guestbook.find({}, {
+                sort: {
+                    _id: -1
+                }
+            });
         }
     });
     Template.create.created = function() {
@@ -306,7 +314,7 @@ if (Meteor.isClient) {
         },
         'click [name=skip]': function() {
             var site = Site.findOne();
-            Router.go('/' + site.person.name.replace(' ',''));
+            Router.go('/' + site.person.name.replace(' ', ''));
         }
     });
 
@@ -364,11 +372,14 @@ if (Meteor.isClient) {
         site: function() {
             return Site.findOne();
         }
-    })
+    });
 
     Template.nav.events({
         'click [name=clear]': function() {
             Action.clear();
+        },
+        'submit #guestbook-new-entry': function() {
+            $('#bb-nav-next').click();
         }
     });
 
