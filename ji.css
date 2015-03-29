@@ -5,11 +5,20 @@
 
 form input[type=text]{
 }
+div.five.columns {
+    padding: 10px 15px;
+    border: 2px white solid;
+    transition: all 0.3s ease;
+    margin-bottom: 10px;
+    min-height: 50%;
+    border-radius: 3px;
+}
+div.five.columns:hover {
+}
 
 .selected {
-    border: 2px black solid;
-    padding: 16px;
     width: 100%;
+    border: 2px grey solid !important;
 }
 
 .editor {
