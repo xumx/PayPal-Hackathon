@@ -6,8 +6,10 @@
 form input[type=text]{
 }
 
-.block.selected {
-    border: 1px black solid;
+.selected {
+    border: 2px black solid;
+    padding: 16px;
+    width: 100%;
 }
 
 .editor {

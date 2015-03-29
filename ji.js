@@ -129,9 +129,7 @@ Site.attachSchema(new SimpleSchema({
         type: String,
         label: "Information",
         autoform: {
-            rows: 10,
-            value: "Date:\nTime:",
-            width: '300px;'
+            rows: 10
         }
     },
     'funeral.location': {
