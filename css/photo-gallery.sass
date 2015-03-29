@@ -8,11 +8,16 @@
     opacity: 0.75
     transition: all 0.6s ease
     transform: scale(1)
+    -webkit-filter: grayscale(100%)
+    filter: grayscale(100%)
     &:hover
       margin: 20px
+      filter: none
+      -webkit-filter: none
       transform: scale(1.2)
       cursor: pointer
       opacity: 1
+
   @media all and (max-width: 500px)
     img
       min-width: 90%
