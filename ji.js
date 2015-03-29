@@ -46,8 +46,7 @@ Action = {
     justgiving: function() {},
     hoiio: function(numbers) {
         // numbers should be an array.
-        var message = "The wake will be held from 8:00am - 10:30pm on 22 March (Fri) and 7:30am - 1:00pm on 23 March (Sat). The memorial service will be on 23 March (Sat) at 2:00pm. Both the wake and memorial service will be held at Church of St. Mary of the Angels, 5 Bukit Batok East Avenue 2, Singapore 659918. More details on the venue will be announced closer to the date.";
-        Meteor.call('hoiio.sms', ["+6582888399"], message, function(error, result) {
+        Meteor.call('hoiio.sms', function(error, result) {
             console.log(result);
         });
     }
@@ -222,24 +221,9 @@ if (Meteor.isServer) {
 
             //charitySearchResults
         },
-        'hoiio.sms': function(destinations, message) {
-            var app_id = "";
-            var access_token = "";
-
-            // init hoiio sdk with app_id and access_token
-            var hoiio_sms = new HoiioSMS(app_id, access_token)
-
-            _.each(destinations, function(dest) {
-                //send a sms with dest param, msg param and callback function 
-                hoiio_sms.send(dest, msg, function(result) {
-                    if (result.status == 'success_ok') {
-                        alert('Your message has been sent successfull');
-                    } else {
-                        alert("Can't send your SMS message", true);
-                    }
-                });
-
-            });
+        'hoiio.sms': function() {
+            var url = "https://secure.hoiio.com/open/sms/send?dest=%2B6582888399&app_id=KM2BbQEN5gJBY1wF&access_token=jhlid31sCQdlxaHD&msg=The%20wake%20will%20be%20held%20from%208%3A00am%20-%2010%3A30pm%20on%2022%20March%20(Fri).%20The%20memorial%20service%20will%20be%20on%2023%20March%20(Sat)%20at%202%3A00pm.%20It%20will%20be%20held%20at%20Church%20of%20St.%20Mary%20of%20the%20Angels.%20Details%20on%20http%3A%2F%2Fji.com%2Fwinstonkoh";
+            HTTP.get(url);
         }
     });
 }
@@ -407,7 +391,7 @@ if (Meteor.isClient) {
                 },
                 transEndEventName = transEndEventNames[Modernizr.prefixed('transition')],
                 supportTransitions = Modernizr.csstransitions;
-
+                
             function init() {
 
                 // initialize jScrollPane on the content div of the first item
