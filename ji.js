@@ -1,9 +1,10 @@
 JUSTGIVING_ENDPOINT = 'https://api.justgiving.com/54d08cef';
 
 Action = {
+    clear: function() {
+        Meteor.call('clear');
+    },
     quickFill: function() {
-        Site.remove(Site.findOne()._id)
-
         Site.insert({
             "person": {
                 "name": "Winston Koh",
@@ -31,6 +32,13 @@ Action = {
                 "email": "mary@gmail.com"
             }
         });
+
+        Guestbook.insert({
+            author: 'Andrea Koh',
+
+            message: 'The years following were whirlwind ones for Winston and our Cohort – they have passed so swiftly many of us wonder where have they gone. The children grew up from the days we would hold kids’ birthday parties as an excuse for us parents to get together and have a mini-reunion; our children became young adults, accomplished in their own right – just witness this in Melissa and Andrea. Several years ago, as one by one we started to pass the age of 40 and as a reminder of our mortality, our Cambridge year started to meet annually. We generously extended this invitation to our Oxford counterparts. Winston was always one of the first to respond to the email can you make this or other date, vying for first place with another dear friend based in Hong Kong! These gatherings were organised and made painless and seamless by another dear friend, a “national treasure”, who has been key to rounding up our Cohort each year, and who has been key to joining us up on this occasion. In the course of these gatherings, where we would tuck into Singapore’s gastronomic delights, chicken rice, otak, chilli crab, while reminiscing over stodgy English food, CCF houseparties, long ago times when we were young and 10 kg lighter, Winston would amaze us with stories of his travels, sporting achievements, ball room dancing prowess and athleticism. At the time I thought – Winston seemed to grow younger every year we met, with a new tale of adventure, a new skill mastered, a new challenge he wanted to conquer – you felt so energised in his company!'
+        });
+
     },
     justgiving: function() {
 
@@ -179,14 +187,6 @@ Router.route('/', function() {
     this.render('landing');
 });
 
-Router.route('/:year/:name', function() {
-    this.render('nav', {
-        data: function() {
-            return Site.findOne()
-        }
-    });
-});
-
 Router.route('/landing', function() {
     this.render('landing');
 });
@@ -195,8 +195,25 @@ Router.route('/create', function() {
     this.render('create');
 });
 
+Router.route('/charity', function() {
+    this.render('charityselection');
+});
+
+
+Router.route('/:name', function() {
+    this.render('nav', {
+        data: function() {
+            return Site.findOne()
+        }
+    });
+});
+
 if (Meteor.isServer) {
     Meteor.methods({
+        'clear': function() {
+            Site.remove({});
+            Guestbook.remove({});
+        },
         'justgiving.GetCharityById': function(id) {
             return HTTP.get(JUSTGIVING_ENDPOINT + '/v1/charity/' + id, {
                 headers: {
@@ -247,26 +264,14 @@ if (Meteor.isClient) {
     Template.create.created = function() {
         // Session.set('charityList', []);
     };
-    Template.create.helpers({
+
+    Template.charityselection.helpers({
         charityList: function() {
             return Session.get('charityList');
-        },
-        insertOrUpdate: function() {
-            if (Site.findOne()) {
-                return 'update';
-            } else {
-                return 'insert';
-            }
-        },
-        doc: function() {
-            return Site.findOne();
         }
     });
 
-    Template.create.events({
-        'click [name=quickFill]': function () {
-            Action.quickFill();  
-        },
+    Template.charityselection.events({
         'click [name=searchCharity]': function(event, template) {
             var query = template.find('[name=charityQuery]').value;
             if (query) {
@@ -293,6 +298,33 @@ if (Meteor.isClient) {
             }
 
             console.log('selected ' + this.charityId);
+        },
+        'click [name=skip]': function() {
+            var site = Site.findOne();
+            Router.go('/' + site.person.name);
+        }
+    });
+
+
+    Template.create.helpers({
+        insertOrUpdate: function() {
+            if (Site.findOne()) {
+                return 'update';
+            } else {
+                return 'insert';
+            }
+        },
+        doc: function() {
+            return Site.findOne();
+        }
+    });
+
+    Template.create.events({
+        'submit #details': function() {
+            Router.go('/charity');
+        },
+        'click [name=quickFill]': function() {
+            Action.quickFill();
         }
     });
 
@@ -324,6 +356,12 @@ if (Meteor.isClient) {
         }
     })
 
+    Template.nav.events({
+        'click [name=clear]': function() {
+            Action.clear();
+        }
+    });
+    
     Template.nav.rendered = function() {
         var Page = (function() {
 

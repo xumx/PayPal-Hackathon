@@ -3,27 +3,6 @@
         <h2>
             <a name="quickFill">Memorial Details</a>
         </h2>
-        {{> quickForm collection="Site" id="details" type=insertOrUpdate doc=doc}}
-        <br>
-
-        <h1>Optional</h1>
-
-        <h3>Choose a Charity as donation target. //TODO Rephrase this</h3>
-        <input type="text" name="charityQuery">
-        <button name="searchCharity">Search</button>
-        <hr>
-
-
-
-        {{#each charityList}}
-        <div class="block" style="display: inline-block; max-width: 400px; margin: 16px; padding:16px;">
-            <!-- <img src="{{logoUrl}}" alt=""> -->
-            <h4>{{name}}</h4>
-            <p>{{description}}</p>
-            <button name="selectCharity">Choose</button>
-            <button>Details</button>
-        </div>
-        
-        {{/each}}
+        {{> quickForm collection="Site" id="details" buttonContent="Charity Selection" type=insertOrUpdate doc=doc}}
     </div>
 </template>
