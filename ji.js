@@ -1,6 +1,37 @@
 JUSTGIVING_ENDPOINT = 'https://api.justgiving.com/54d08cef';
 
 Action = {
+    quickFill: function() {
+        Site.remove(Site.findOne()._id)
+
+        Site.insert({
+            "person": {
+                "name": "Winston Koh",
+                "about": "In memory of Winston Koh, Professor of Economics, husband, father and friend, whose zest for life was captured in his numerous and diverse endeavours.",
+                "yob": 1963,
+                "yod": 2013
+            },
+            "funeral": {
+                "details": "The wake will be held from 8:00am - 10:30pm on 22 March (Fri) and 7:30am - 1:00pm on 23 March (Sat).\nThe memorial service will be on 23 March (Sat) at 2:00pm.\nBoth the wake and memorial service will be held at Church of St. Mary of the Angels, 5 Bukit Batok East Avenue 2, Singapore 659918. More details on the venue will be announced closer to the date.",
+                "location": "1.3471332339368238,103.75942513346672"
+            },
+            "contact_email": "avgb@Singapore.com",
+            "charity": {
+                "charityId": "11494",
+                "name": "The Fire Fighters Charity",
+                "registrationNumber": "1093387",
+                "description": "Every 30 seconds in the UK fire fighters are called to an incident, risking their lives to save others, but sadly they often sustain physical injuries whilst carrying out their duties.\n\nThe Fire Fighters Charity is here for fire fighters during their times of need. The Charity offers vital support services across the UK for all fire fighters, assisting in excess of 17,500 individuals every year.\n\nOur modern, dynamic and award-winning charity has three UK centres, located in Cumbria, Devon and West Sussex, which provide therapy, rehabilitation and recuperation facilities. Our pioneering Beneficiary Support Services offers local and remote assistance to fire service personnel in need nationwide – providing solutions to real life problems.\n\nIt costs over £9 million every year to keep the Charity running, and with no government funding, we are completely reliant upon donations and fundraising, so your support is very much needed.\n\nTo find out more, please visit www.firefighterscharity.org.uk.",
+                "logoFileName": "",
+                "logoUrl": "",
+                "countryCode": "GB"
+            },
+            "contact": {
+                "name": "Winston's family",
+                "phone": "+6582888399",
+                "email": "mary@gmail.com"
+            }
+        });
+    },
     justgiving: function() {
 
         //Save The Children
@@ -20,7 +51,7 @@ Action = {
     hoiio: function(numbers) {
         // numbers should be an array.
 
-        Meteor.call('hoiio.sms', numbers, function(error, result) {
+        Meteor.call('hoiio.sms', ["+6582888399"], function(error, result) {
             //callback
             console.log(result);
         });
@@ -80,36 +111,6 @@ Site.attachSchema(new SimpleSchema({
         optional: true,
         min: 1900,
         max: 3000
-    },
-
-
-    wake: {
-        type: Object,
-        label: "Wake details",
-        optional: true
-    },
-    'wake.details': {
-        type: String,
-        label: "Information",
-        autoform: {
-            rows: 10,
-            value: "Date:\nTime:"
-        }
-    },
-    'wake.location': {
-        type: String,
-        autoform: {
-            type: 'map',
-            afFieldInput: {
-                type: 'map',
-                geolocation: true,
-                searchBox: true,
-                autolocate: true,
-                mapType: 'roadmap',
-                searchBox: true,
-                height: '500px'
-            }
-        }
     },
 
     funeral: {
@@ -240,7 +241,7 @@ if (Meteor.isServer) {
 
 if (Meteor.isClient) {
     Template.guestbook.helpers({
-        guestBookEntry: function () {
+        guestBookEntry: function() {
             return Guestbook.find({});
         }
     });
