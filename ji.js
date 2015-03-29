@@ -43,27 +43,11 @@ Action = {
             message: 'As every superhero lives a double life, for me, my dad wasn’t just the athletic sportsman, the intelligent, eloquent professor, or even the charismatic dancer who looks just a little too young for his age. To me, my dad’s double life was well, the life of being my dad. I often find that is the little things people do that let us see the greatness in them. My dad would always crack lame jokes that sometimes didn’t make sense and would leave us all with quizzical expressions plastered on our faces, save for him, who would be chuckling as if he was the funniest person in the world (In his mind at least) or doing little funny things like making song parodies in a strange operatic rendition. And of course, little things like reminding me to take my vitamin c, saying “Hi Andie!” when he came home from work, telling me not to sleep too late those little things made me remember that there\'s always someone there rooting for me, to keep going , and to not give up. And when I faced a time when it seemed like everyone was against me and I felt so alone in the world, my dad supported me and always used to say "Who bully you? I\'ll beat them up for you.\" That made me feel more strong and protected than anything else in the world, it made me remember that I had my very own superhero constantly giving me superhuman strength to carry on in my life, no matter how hard it seemed to be. Even when he had our arguments, I knew my dad meant the best for me, and sacrificed so much just for my own good. Just like any superhero would, my dad would always put others first, and wanted to protect others at any cost.'
         });
     },
-    justgiving: function() {
-
-        //Save The Children
-        //
-        // Meteor.call('justgiving.CharitySearch', function(error, result) {
-        //     console.log(result);
-        // });
-
-        // Meteor.call('justgiving.GetCharityById', function(error, result) {
-        //     console.log(result);
-        // });
-
-
-        https: //www.justgiving.com/4w350m3/donation/direct/charity/187580
-            return "http://www.justgiving.com/4w350m3/donation/direct/charity/18570?amount=50&currency=USD&donationId=JUSTGIVING-DONATION-ID"
-    },
+    justgiving: function() {},
     hoiio: function(numbers) {
         // numbers should be an array.
-
-        Meteor.call('hoiio.sms', ["+6582888399"], function(error, result) {
-            //callback
+        var message = "The wake will be held from 8:00am - 10:30pm on 22 March (Fri) and 7:30am - 1:00pm on 23 March (Sat). The memorial service will be on 23 March (Sat) at 2:00pm. Both the wake and memorial service will be held at Church of St. Mary of the Angels, 5 Bukit Batok East Avenue 2, Singapore 659918. More details on the venue will be announced closer to the date.";
+        Meteor.call('hoiio.sms', ["+6582888399"], message, function(error, result) {
             console.log(result);
         });
     }
