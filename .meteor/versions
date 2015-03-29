@@ -43,7 +43,6 @@ minimongo@1.0.7
 mobile-status-bar@1.0.3
 momentjs:moment@2.8.4
 mongo@1.1.0
-mpowaga:autoform-summernote@0.3.1
 mrt:googlemaps@0.0.2
 multiply:iron-router-progress@1.0.1
 observe-sequence@1.0.5
@@ -57,10 +56,8 @@ routepolicy@1.0.5
 session@1.1.0
 spacebars@1.0.6
 spacebars-compiler@1.0.5
-summernote:standalone@0.6.0_1
 templating@1.1.0
 tracker@1.0.6
-twbs:bootstrap@3.3.4
 ui@1.0.6
 underscore@1.0.3
 url@1.0.4

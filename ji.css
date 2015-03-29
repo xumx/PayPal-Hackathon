@@ -4,8 +4,6 @@
 */
 
 form input[type=text]{
-    height: 64px;
-    font-size: 2em;
 }
 
 .block.selected {

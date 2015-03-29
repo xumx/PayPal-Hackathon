@@ -1,0 +1,24 @@
+<template name="charityselection">    
+
+    <h3> Would you like to nominate a charity? </h3>
+    <input type="text" name="charityQuery">
+    <select name="charityQuery">
+        <option value="Children"> Children </option>
+        <option value="Elderly"> Elderly </option>
+    </select>
+
+    <button name="searchCharity">  Search </button>
+    <hr>
+
+    {{#each charityList}}
+    <div class="block" style="display: inline-block; max-width: 400px; margin: 16px; padding:16px;">
+        <!-- <img src="{{logoUrl}}" alt=""> -->
+        <h4>{{name}}</h4>
+        <p>{{description}}</p>
+        <button name="selectCharity">Choose</button>
+        <button>Details</button>
+    </div>
+    {{/each}}
+
+    
+</template>

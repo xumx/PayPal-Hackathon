@@ -83,7 +83,7 @@ Site = new Mongo.Collection("site");
 Site.attachSchema(new SimpleSchema({
     person: {
         type: Object,
-        label: "Remembered"
+        label: "Personal Details"
     },
     'person.name': {
         type: String,
@@ -112,7 +112,6 @@ Site.attachSchema(new SimpleSchema({
         min: 1900,
         max: 3000
     },
-
     funeral: {
         type: Object,
         label: "Funeral details",
