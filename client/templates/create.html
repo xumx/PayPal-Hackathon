@@ -1,7 +1,7 @@
 <template name="create">
     <div class="container">
         <h2>
-            Memorial Details
+            <a name="quickFill">Memorial Details</a>
         </h2>
         {{> quickForm collection="Site" id="details" type=insertOrUpdate doc=doc}}
         <br>
@@ -27,7 +27,7 @@
         {{/each}}
 
 
-
+        
         <a href="/" class="btn btn-large btn-success">Create Site</a>
     </div>
 </template>

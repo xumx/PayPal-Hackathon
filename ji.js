@@ -265,6 +265,9 @@ if (Meteor.isClient) {
     });
 
     Template.create.events({
+        'click [name=quickFill]': function () {
+            Action.quickFill();  
+        },
         'click [name=searchCharity]': function(event, template) {
             var query = template.find('[name=charityQuery]').value;
             if (query) {
